@@ -152,7 +152,7 @@
     if(info) {
       this._addCheckbox(info, item);      
 
-      if(info.children) {
+      if(info.children && info.children.length) {
         this._addSublist(info.children, item);
 
         var $sublistNode = $(item).children('ul');
@@ -213,7 +213,7 @@
       this._update([info]);
     }, this));
 
-    if(!info.children) {
+    if(!info.children || !info.children.length) {
       $expandButton.attr('disabled', true);
     } 
 

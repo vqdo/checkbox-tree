@@ -1,9 +1,9 @@
 /*
- * y
+ * Checkbox Tree
  * https://github.com/vqdo/checkbox-tree
  *
  * Copyright (c) 2015 Victoria Do
- * Licensed under the MIT license.s
+ * Licensed under the MIT license.
  */
 
 (function($) {
@@ -150,9 +150,9 @@
     this._initExpandable(info, item);
 
     if(info) {
-      this._addCheckbox(info, item, parent);      
+      this._addCheckbox(info, item);      
 
-      if(info.children) {
+      if(info.children && info.children.length) {
         this._addSublist(info.children, item);
 
         var $sublistNode = $(item).children('ul');
@@ -172,7 +172,6 @@
    * args:
    *    - options: object containing checkbox attributes
    *    - container: the html node that wraps the checkbox
-   *    - parent: the outer list, if it exists 
    */
   CBTree.prototype._addCheckbox = function(options, container) {
 
@@ -214,7 +213,7 @@
       this._update([info]);
     }, this));
 
-    if(!info.children) {
+    if(!info.children || !info.children.length) {
       $expandButton.attr('disabled', true);
     } 
 
