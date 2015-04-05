@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">        
+        <base href="/javascript-projects/checkbox-tree/dist/">
+        <link rel="shortcut icon" href="app/assets/images/icons/favicon.ico" type="image/icon"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+        <link rel="stylesheet" href="css/master.css">
+
+        <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="jquery.checkboxtree.js"></script>
+
+        <title>Demo</title>
+    </head>
+    <body>
+        <h1>Demo</h1>
+
+        <div class="expanded">
+        <div class="cbt-expand"></div>
+        </div>
+
+        <div id="container">
+
+        </div>
+
+        <script>
+            var jsonData = [
+                {
+                    "name": "Arizona",
+                    "selected": true,
+                    "children": [
+                        { "name": "Phoenix", "selected": true },
+                        { "name": "Tucson", "selected": true }
+                    ]
+                },
+                {
+                    "name": "California",
+                    "children": [
+                        { "name": "Fresno" },
+                        { "name": "Los Angeles", "selected": true },
+                        { "name": "Sacramento" },
+                        { "name": "San Diego" },
+                        { "name": "San Francisco" },
+                        { "name": "San Jose" },
+                    ]
+                },
+                {
+                    "name": "Oregon",
+                    "children": [
+                        { "name": "Portland" },
+                        { "name": "Eugene" }
+                    ]
+                },
+                {
+                    "name": "Nevada",
+                    "children": [
+                        { "name": "Las Vegas" },
+                        { "name": "Reno" }
+                    ]
+                },
+                {
+                    "name": "New Mexico",
+                    "children": [
+                        { "name": "Albuquerque" },
+                        { "name": "Las Cruces" },
+                        { "name": "Santa Fe" }
+                    ]
+                }
+            ];
+
+
+            $(document).ready(function() {
+                $('#container').checkboxtree({
+                    data: jsonData
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+body {
+    background: #EEE;
+    color: #333;
+    font: normal 1em 'Droid Sans', Helvetica, Arial, sans-serif;
+}
+
+#container {
+    background: #FFF;
+    max-width: 900px;
+    margin: auto;
+    padding: 2em;
+}
+
+/**************************
+ Checkbox Tree Styles 
+ **************************/
+
+.cbt-item label, .cbt-expand {
+    font-size: 1.2em;    
+}
+
+.cbt-list li {
+    border-bottom: 1px solid #CCC;
+    list-style-type: none;
+    padding: 0.5em 0;
+}
+.cbt-list li:last-child {
+    border-bottom: 0;
+}
+
+/* Expand button */
+.cbt-expand {
+    border-top: 0.5em solid transparent;
+    border-bottom: 0.5em solid transparent;
+    border-left: 0.87em solid #44B5CF;
+    border-right: 0;
+    display: inline;
+    float: left;
+    margin: 0.1em 0.5em 0 0;
+    height: 0;
+    width: 0;
+}
+span.cbt-expand[disabled="disabled"] {
+    border: 0;
+    border-radius: 100%;
+    margin: 0.25em 0.5em;
+    width: 0.25em;
+    height: 0.25em;
+}
+.expanded .cbt-expand {
+    border-top: 0.87em solid #44B5CF;
+    border-bottom: 0;
+    border-left: 0.5em solid transparent;
+    border-right: 0.5em solid transparent;
+}
+
+/* Checkbox */
+.cbt-item input[type="checkbox"]{
+    margin: 0 0.5em 0 0;
+}
