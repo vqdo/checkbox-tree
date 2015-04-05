@@ -1,30 +1,16 @@
-# Y
+# Checkbox Tree
 
-Custom checkbox tree JQuery pl
+Custom checkbox tree JQuery plugin
 
 ## Getting Started
 Download the [production version][min] or the [development version][max].
 
-[min]: https://raw.github.com/victoria/checkbox-tree/master/dist/y.min.js
-[max]: https://raw.github.com/victoria/checkbox-tree/master/dist/y.js
+[min]: https://raw.github.com/victoria/checkbox-tree/master/dist/jquery.checkboxtree.min.js
+[max]: https://raw.github.com/victoria/checkbox-tree/master/dist/jquery.checkboxtree.js
 
 In your web page:
 
 ```html
-<script src="jquery.js"></script>
-<script src="dist/y.min.js"></script>
-<script>
-jQuery(function($) {
-  $.awesome(); // "awesome"
-});
-</script>
+<script src="dist/jquery.checkboxtree.js"></script>
+<script src="dist/jquery.checkboxtree.min.js"></script>
 ```
-
-## Documentation
-_(Coming soon)_
-
-## Examples
-_(Coming soon)_
-
-## Release History
-_(Nothing yet)_

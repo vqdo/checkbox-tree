@@ -3,11 +3,16 @@ body {
     color: #333;
     font: normal 1em 'Droid Sans', Helvetica, Arial, sans-serif;
 }
+h1 {
+    color: #44B5CF;
+    text-align: center;
+}
 
 #container {
     background: #FFF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 900px;
-    margin: auto;
+    margin: 2em auto;
     padding: 2em;
 }
 
@@ -43,11 +48,11 @@ body {
 span.cbt-expand[disabled="disabled"] {
     border: 0;
     border-radius: 100%;
-    margin: 0.25em 0.5em;
+    margin: 0.25em 0.6em;
     width: 0.25em;
     height: 0.25em;
 }
-.expanded .cbt-expand {
+.expanded > .cbt-expand {
     border-top: 0.87em solid #44B5CF;
     border-bottom: 0;
     border-left: 0.5em solid transparent;
@@ -57,4 +62,16 @@ span.cbt-expand[disabled="disabled"] {
 /* Checkbox */
 .cbt-item input[type="checkbox"]{
     margin: 0 0.5em 0 0;
+}
+
+/* Selected styles */
+.cbt-sublist-checked-all > label {
+    color: #000;
+}
+.cbt-sublist-checked-partial >  label {
+    color: #444;
+    font-style: italic;
+}
+.cbt-sublist-checked-none  > label{
+    color: #777;
 }
