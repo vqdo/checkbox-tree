@@ -10,19 +10,42 @@
 
   var pluginName = 'checkboxtree',
       htmlPrefix = 'cbt-',
-      listClass = htmlPrefix + 'list',
+      listClass  = htmlPrefix + 'list',
 
       // Class names
-      expandClass = htmlPrefix + 'expand',
+      expandClass      = htmlPrefix + 'expand',
       checkedStateNone = htmlPrefix + 'sublist-checked-none',
       checkedStatePartial = htmlPrefix + 'sublist-checked-partial',
-      checkedStateAll = htmlPrefix + 'sublist-checked-all',
+      checkedStateAll  = htmlPrefix + 'sublist-checked-all',
 
       // Default options for plugin
       defaults = {
         data: {}
       }; 
 
+  // Collection method.
+  $.fn[pluginName] = function( data ) {
+
+    $.fn[pluginName].getItems = function() {
+      return (data && data.data) || {};
+    };
+
+    return this.each(function() {
+
+        if (!$.data(this, 'plugin_' + pluginName)) {
+          
+          var tree = new CBTree( this, data );
+          $.data(this, 'plugin_' + pluginName, tree);
+
+          $(this).data('tree', tree);
+        }
+    });
+  };      
+
+  /***************************************************
+   * Underlying object that handles the state of the 
+   * checkbox tree
+   **************************************************/
   function CBTree( element, options ) {
     this.element = element;
 
@@ -83,8 +106,8 @@
           return;
         }
 
-        var html = data._htmlNode; 
-        var $ul = $(html).children('ul');
+        var html = data._htmlNode,
+            $ul = $(html).children('ul');
 
         var numChecked = $($ul).find('> .cbt-item > .cbt-cb:checked').length;
 
@@ -97,25 +120,6 @@
           html.addClass(checkedStateAll);
         }
       };
-
-  // Collection method.
-  $.fn[pluginName] = function( data ) {
-
-    $.fn[pluginName].getItems = function() {
-      return (data && data.data) || {};
-    };
-
-    return this.each(function() {
-
-        if (!$.data(this, 'plugin_' + pluginName)) {
-          
-          var tree = new CBTree( this, data );
-          $.data(this, 'plugin_' + pluginName, tree);
-
-          $(this).data('tree', tree);
-        }
-    });
-  };
 
   /***************************************************
    * Creates an unordered list to hold checkbox items
@@ -139,7 +143,7 @@
 
   /********************************************************
    * Creates a single checkbox item with expandable button
-   * and any sublists
+   * and instantiates any sublists
    ********************************************************/
   CBTree.prototype._addItem = function(info, parent) {
     if(!info || !parent) {
@@ -147,6 +151,8 @@
     }
     
     var item = $('<li />').addClass(htmlPrefix + 'item');
+    var $sublistNode = $(item).children('ul');    
+
     this._initExpandable(info, item);
 
     if(info) {
@@ -155,7 +161,6 @@
       if(info.children && info.children.length) {
         this._addSublist(info.children, item);
 
-        var $sublistNode = $(item).children('ul');
         $(item).on('change', $sublistNode, function() {
           updateCheckedUI(info);
         });
@@ -166,13 +171,13 @@
     $(parent).append(item);
   };
 
-  /** 
+  /*****************************************************
    * Creates a checkbox and label.
    * 
-   * args:
-   *    - options: object containing checkbox attributes
-   *    - container: the html node that wraps the checkbox
-   */
+   * params:
+   *  options   object containing checkbox attributes
+   *  container the html node that wraps the checkbox
+   *****************************************************/
   CBTree.prototype._addCheckbox = function(options, container) {
 
       var $checkbox  = $('<input type="checkbox" />'),
@@ -191,9 +196,9 @@
         .attr('for', cbName)
         .html(options.name);    
 
-      // Add private and public fields
+      // Initialize checkbox node fields
       options.children  = options.children || [];
-      options.selected  = !!options.selected; // Set selected field explicityly
+      options.selected  = !!options.selected; // Set selected field explicitly
       options._expanded = !!options.selected;
       options._htmlNode = container; 
 
@@ -208,11 +213,13 @@
     var $expandButton = $('<span />')
           .addClass(expandClass);
 
+    // Toggle the expanded state when the user clicks on the expand button
     $expandButton.click($.proxy(function() {
       info._expanded = !info._expanded;
       this._update([info]);
     }, this));
 
+    // Only toggleable if there are children
     if(!info.children || !info.children.length) {
       $expandButton.attr('disabled', true);
     } 
